@@ -1,0 +1,8 @@
+export { default as Login } from './Login'
+export { default as Register } from './Register'
+export { default as NotFound } from './NotFound'
+export { default as SideBar } from './SideBar'
+export { default as UserInfoPopUp } from './UserInfoPopUp'
+export { default as NavBar } from './NavBar'
+export { default as AddProfile } from './AddProfile'
+export { default as UserProfile } from './UserProfile'

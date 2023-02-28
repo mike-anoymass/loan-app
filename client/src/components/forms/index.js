@@ -1,0 +1,5 @@
+export { default as Attachments } from "./Attachments"
+export { default as BasicInfo } from "./BasicInfo"
+export { default as WorkInfo } from "./WorkInfo"
+export { default as ContactInfo } from "./ContactInfo"
+export { default as Final } from "./Final"
