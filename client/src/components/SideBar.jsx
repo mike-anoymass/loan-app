@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { AuthContext } from '../helpers/AuthContext';
 import logo from "../assets/logoweb.webp"
 import { Link, NavLink } from 'react-router-dom';
 import { AiFillHome, AiOutlineHistory} from 'react-icons/ai';
@@ -10,6 +9,7 @@ import { SiWebmoney } from 'react-icons/si';
 import { CiFaceSmile } from 'react-icons/ci';
 import { GiReceiveMoney } from 'react-icons/gi';
 import { GrNotification, GrUserExpert } from "react-icons/gr";
+import { AuthContext } from '../helpers/Context';
 
 
 const SideBar = closeSideBar => {

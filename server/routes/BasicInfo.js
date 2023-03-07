@@ -13,11 +13,13 @@ router.post("/", auth, async (req, res) => {
         }
     })
 
+    data.userId = authUser.googleId
+
     if(!exist){
-        data.userId = authUser.googleId
         await BasicInfo.create(data)
         res.json("Basic Info Saved")
     }else{
+        await BasicInfo.update({fullName: data.fullName, gender: data.gender}, {where: {userId: data.userId}})
         res.json({error: "Basic Info Exist"})
     }
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import { Routes, Route } from "react-router-dom";
 import { Login, Register, NotFound, AddProfile} from './components'
-import { AuthContext } from './helpers/AuthContext';
+import { AuthContext } from './helpers/Context';
 import Home from './containers/Home';
 
 const App = () => {
@@ -24,14 +24,14 @@ const App = () => {
         loginToken: localStorage.getItem("loginToken")
       }
     }).then(res => {
-      setAuthUser({...authUser, 
+      setAuthUser(authUser => ({...authUser, 
         googleId: res.data.user.googleId,
         name: res.data.user.name,
         imageUrl: res.data.user.imageUrl,
         email: res.data.user.email,
         role: res.data.user.role,
         login_status: res.data.login_status 
-      })
+      }))
     }).catch(err => console.log("verification_error", err))
   }, [])
 

@@ -13,7 +13,15 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 len: [3,255]
             }
-        }
+        },
+        paybackAmount: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                isNumeric: true
+            }
+        },
+        
     }, {tableName: "loanBasics"})
 
     LoanBasic.associate = models => {

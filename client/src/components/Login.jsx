@@ -7,7 +7,7 @@ import { gapi } from 'gapi-script';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../helpers/AuthContext';
+import { AuthContext } from '../helpers/Context';
 
 const Login = () => {
   const clientId = process.env.REACT_APP_GOOGLE_API_TOKEN
@@ -42,14 +42,14 @@ const Login = () => {
               loginToken: localStorage.getItem("loginToken")
             }
           }).then(res => {
-            setAuthUser({...authUser, 
+            setAuthUser(authUser => ({...authUser, 
               googleId: res.data.user.googleId,
               name: res.data.user.name,
               imageUrl: res.data.user.imageUrl,
               email: res.data.user.email,
               role: res.data.user.role,
               login_status: res.data.login_status 
-            })
+            }))
             navigate("/")  
           }).catch(err => console.log("verification_error", err))
            

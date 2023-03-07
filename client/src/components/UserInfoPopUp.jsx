@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { AuthContext } from '../helpers/AuthContext'
+import { AuthContext } from '../helpers/Context'
 import { BiLogOutCircle } from 'react-icons/bi'
 import {Link} from "react-router-dom"
 
@@ -8,7 +8,7 @@ const UserInfoPopUp = () => {
 
  const logout = () => {
     localStorage.removeItem("loginToken")
-    setAuthUser({...authUser, login_status: false})
+    setAuthUser(authUser => ({...authUser, email:"", login_status: false}))
     setToggleUserInfo(false)
   }
   
@@ -20,7 +20,9 @@ const UserInfoPopUp = () => {
       </div>
       <hr className='w-full' />
       
+      <Link to={`/home`} className='px-5 py-1 my-1'>Home Page</Link>
       <Link to={`/profile`} className='border-2 border-gray-300 rounded-lg px-5 py-1 my-1'>View profile</Link>
+    
       <button onClick={logout} className="flex items-center gap-2 justify-between">
         <BiLogOutCircle fontSize={20}/> 
         Logout

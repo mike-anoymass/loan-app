@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { SideBar, UserInfoPopUp, NavBar, UserProfile} from '../components'
+import { SideBar, UserInfoPopUp, NavBar, UserProfile, LoanApplication} from '../components'
 import logo from "../assets/logoweb.webp"
 import { AiOutlineMenu, AiFillCloseCircle } from "react-icons/ai";
-import { AuthContext } from '../helpers/AuthContext';
+import { AuthContext } from '../helpers/Context';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import About from './About';
 import axios from 'axios';
@@ -12,7 +12,6 @@ const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false)
   const navigate = useNavigate()
 
-  
   useEffect(() => {
     axios.get("http://localhost:3001/basicInfo/checkProfile/profile", {
       headers: {
@@ -42,7 +41,7 @@ const Home = () => {
       </div>
 
       {/*mobile navbar */}
-      <div className='md:hidden flex flex-row p-3'>
+      <div className='md:hidden w-full flex flex-row p-3'>
         <div className='flex relative p-2 my-1 justify-between items-center shadow-md bg-white w-full'>
           <div className='p-2'>
             <AiOutlineMenu
@@ -98,15 +97,16 @@ const Home = () => {
 
 
       {/* Horizontal navigation  */}
-      <div className='w-full'>
+      <div className='w-full h-full'>
         <div>
           <NavBar />
         </div>
 
-        <div className='p-5 flex flex-col items-center justify-center'>
+        <div className='p-5 h-full'>
           <Routes>
             <Route path='/who' element={<About/>}/>
             <Route path='/profile' element={<UserProfile/>}/>
+            <Route path='/category/newApplication' element={<LoanApplication/>}/>
           </Routes>
         </div>
       </div>

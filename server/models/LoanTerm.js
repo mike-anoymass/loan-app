@@ -1,5 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const LoanTerm = sequelize.define("LoanTerm", {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: false
+        },
         termName: {
             type: DataTypes.STRING,
             allowNull: false,

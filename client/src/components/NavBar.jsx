@@ -2,12 +2,12 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
-   const isActiveStyle = 'flex items-center px-5 font-bold border-b-2 border-black transaction-all duration-200 ease-in-out hover:shadow-xl py-1'
-  const isNotActiveStyle = 'flex items-center text-gray-500 hover:text-gray-400 transaction-all duration-200 ease-in-out capitalize hover:shadow-xl py-1'
+  const isActiveStyle = 'flex items-center md:text-lg px-5 font-bold border-b-2 border-black transaction-all duration-200 ease-in-out hover:shadow-xl py-1'
+  const isNotActiveStyle = 'flex items-center md:text-lg  hover:text-gray-400 transaction-all duration-200 ease-in-out capitalize hover:shadow-xl py-1'
 
   
   return (
-   <div class="flex items-center bg-gray-100 justify-center p-2 m-2 overflow-x-scroll gap-6 md:text-md text-sm">
+   <div class="flex items-center text-black justify-center p-2 m-2 overflow-auto gap-6 shadow-sm">
      <NavLink
       to={"/what"}
       className = {({isActive}) => isActive ? isActiveStyle : isNotActiveStyle }

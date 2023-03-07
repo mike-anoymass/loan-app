@@ -13,11 +13,21 @@ router.post("/", auth, async (req, res) => {
         }
     })
 
+    data.userId = user.googleId
+
     if(!info){
-        data.userId = user.googleId
         await WorkInfo.create(data)
         res.json(data)
     }else{
+         await WorkInfo.update({
+            incomeSource: data.incomeSource, 
+            description: data.description, 
+            workplace: data.workplace
+            }, { 
+                where: {
+                    userId: data.userId
+                }
+            })
         res.json({error: "Work information exist", data: info})
     }
 })

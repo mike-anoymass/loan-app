@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import axios from 'axios'
-import { AuthContext } from '../../helpers/AuthContext.js'
+import { AuthContext } from '../../../helpers/Context.js'
 import AttachmentsForm from './AttachmentsForm'
-import Loading from '../Loading'
+import Loading from '../../Loading'
   
 const Attachments = ({nextStep, prevStep}) => {
   const {authUser} = useContext(AuthContext)

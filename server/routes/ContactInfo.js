@@ -13,11 +13,22 @@ router.post("/", auth, async (req, res) => {
         }
     })
 
+    data.userId = authUser.googleId
+
     if(!exist){
-        data.userId = authUser.googleId
         await ContactInfo.create(data)
         res.json("Contact Info Saved")
     }else{
+        await ContactInfo.update({
+            mobile: data.mobile, 
+            telephone: data.telephone, 
+            address: data.address, 
+            email: data.email
+            }, { 
+                where: {
+                    userId: data.userId
+                }
+            })
         res.json({error: "Contact Info Exist"})
     }
 

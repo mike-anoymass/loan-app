@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import checkMark from "../../assets/checkmark.gif"
+import checkMark from "../../../assets/checkmark.gif"
 import { useNavigate } from 'react-router-dom'
 
 const Final = () => {

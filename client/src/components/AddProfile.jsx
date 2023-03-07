@@ -2,10 +2,10 @@ import React, {useContext, useEffect, useState} from 'react'
 import firstThingsVideo from "../assets/fistthings.mp4"
 import {AiOutlineMore, AiOutlineSmile} from 'react-icons/ai'
 import { BsTelephoneMinus } from "react-icons/bs";
-import { AuthContext } from '../helpers/AuthContext'
+import { AuthContext } from '../helpers/Context'
 import UserInfoPopUp from './UserInfoPopUp'
 import { useNavigate } from 'react-router-dom'
-import { BasicInfo, ContactInfo, WorkInfo, Attachments, Final } from "./forms";
+import { BasicInfo, ContactInfo, WorkInfo, Attachments, Final } from "./forms/userregisterform";
 
 const AddProfile = () => {
   const { authUser, toggleUserInfo, setToggleUserInfo } = useContext(AuthContext)

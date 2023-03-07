@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useFormikContext, ErrorMessage, Field, Form } from 'formik'
 
 const BasicInfoForm = ({initValues}) => {
-  const {errors, touched, dirty, values, isValid, setValues} = useFormikContext()
+  const {errors, touched, dirty, isValid, setValues} = useFormikContext()
 
   useEffect(() => {
     setValues(initValues)
