@@ -26,6 +26,7 @@ const BasicInfoForm = ({initValues}) => {
                 "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-700" :
                 "w-full p-3 rounded-lg px-5 text-black"}
                 placeholder="What's your name ?"
+                autocomplete="off"
             />
         </div>
 
@@ -75,7 +76,6 @@ const BasicInfoForm = ({initValues}) => {
         <div className='w-full flex flex-col items-end justify-center'>
             <button 
                 type='submit'
-                disabled ={!(dirty && isValid)}
                 className={
                 !(dirty && isValid) ? 
                 "border-0 p-2 bg-white bg-opacity-80 text-gray-400 rounded-xl shadow-2xl px-5"

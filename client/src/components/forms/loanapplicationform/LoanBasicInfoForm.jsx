@@ -11,12 +11,11 @@ const LoanBasicInfoForm = ({initValues}) => {
   }, [initValues])
 
   useEffect(() => {
-    console.log(values.term)
     setFieldValue("paybackAmount", (values.amount * (values.term/100)) + +values.amount)
   }, [values.amount, values.term])
 
   return (
-    <Form className='w-full'>
+    <Form className='w-full overflow-auto'>
       <div className='gap-1 flex flex-col items-start p-2 w-full' >
           <label htmlFor=""
               className={labelStyle}
@@ -82,6 +81,7 @@ const LoanBasicInfoForm = ({initValues}) => {
               className="md:w-1/3 w-2/3 p-3 rounded-lg px-5 text-black border-2 border-black animate-pulse"
               disabled
               placeholder='Payback Amount'
+              autocomplete="off"
             />
           </div>
           

@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     },  {tableName: "loanBankInfo"})
 
     LoanBankInfo.associate = models => {
-        LoanBankInfo.belongsTo(models.LoanBankInfo, {
+        LoanBankInfo.belongsTo(models.LoanBasic, {
             foreignKey: "loanId",
         })
     }

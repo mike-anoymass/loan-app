@@ -1,7 +1,8 @@
 const express = require("express")
+const { Op } = require('sequelize');
 const router = express.Router()
 const auth = require("../middleware/AuthMiddleware")
-const { LoanBasic} = require("../models")
+const { LoanBasic, LoanCollateral, LoanWitness, LoanBankInfo, LoanStatus  } = require("../models")
 
 router.post("/", auth, async (req, res) => {
     const { amount, term, reason, loanId, paybackAmount } = req.body
@@ -61,6 +62,98 @@ router.get("/:id", auth, async (req, res) => {
         res.json({error: "Invalid Loan ID"})
     }
 
+})
+
+
+router.delete("/:id", auth, async (req, res) => {
+    //get loan id from the query parameter
+    const loanID = req.params.id
+
+    if(loanID != 0){
+        //if loan exist then send back loan details
+        const data = await LoanBasic.findByPk(loanID)
+
+        if(data){
+            const resp = await LoanBasic.destroy({
+                where : {
+                    id: loanID
+                }
+            })
+
+            res.json(resp)
+        }else{
+            res.json({error: "Basic Loan information not found"})
+        }
+        
+    }else{
+        res.json({error: "Invalid Loan ID"})
+    }
+
+})
+
+router.get("/myApplications/:userId", auth, async (req, res) => {
+    //get user id from the query parameter
+    const userId = req.params.userId
+    const authUser = req.auth_user.user
+
+    if(authUser.googleId === userId){
+
+        LoanStatus.findAll({
+            attributes: ['loanId']
+        }).then( status => {
+            const ids = status.map(statuses => {
+                return statuses.loanId
+            })
+            LoanBasic.findAll({
+                where: {userId: userId, id: {[Op.notIn]: ids}},
+                order: [
+                    ['id', 'DESC']
+                ]
+            }).then( myLoans => {
+                if(myLoans.length > 0){
+                    res.json(myLoans)
+                }else{
+                    res.json({error: "You have no pending loan applications"})
+                }
+            }) 
+        })
+       
+    }else{
+        res.json({error: "Wrong User"})
+    }
+
+})
+
+router.get("/loan/fullInfo/:id", auth, async (req, res) => {
+    const authUser = req.auth_user.user
+    const loanID = req.params.id
+
+    const basicInfo = await LoanBasic.findOne({
+        where: {
+            id: loanID
+        }
+    })
+
+    const collateralInfo = await LoanCollateral.findOne({
+        where: {
+            loanId: loanID
+        }
+    })
+
+    const witnessInfo = await LoanWitness.findOne({
+        where: {
+            loanId: loanID
+        }
+    })
+
+    const bankInfo = await LoanBankInfo.findOne({
+        where: {
+            loanId: loanID
+        }
+    })
+
+    res.json({basicInfo,collateralInfo, witnessInfo, bankInfo})
+    
 })
 
 

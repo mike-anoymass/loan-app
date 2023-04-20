@@ -21,7 +21,7 @@ const UserInfoPopUp = () => {
       <hr className='w-full' />
       
       <Link to={`/home`} className='px-5 py-1 my-1'>Home Page</Link>
-      <Link to={`/profile`} className='border-2 border-gray-300 rounded-lg px-5 py-1 my-1'>View profile</Link>
+      <Link to={`/category/profile`} className='border-2 border-gray-300 rounded-lg px-5 py-1 my-1'>View profile</Link>
     
       <button onClick={logout} className="flex items-center gap-2 justify-between">
         <BiLogOutCircle fontSize={20}/> 

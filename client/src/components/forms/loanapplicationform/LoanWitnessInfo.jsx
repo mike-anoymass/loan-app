@@ -1,29 +1,28 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Formik } from "formik"
 import * as Yup from 'yup'
-import { LoanBasicInfoForm } from "./"
+import { LoanBasicInfoForm, LoanWitnessInfoForm } from "."
 import axios from 'axios'
 import { LoanContext } from "../../../helpers/Context"
 import Loading from "../../Loading"
 
 
-const LoanBasicInfo = ({nextStep}) => {
+const LoanWitnessInfo = ({nextStep, prevStep}) => {
   //set initial values for our form
   const [initValues, setInitValues] = useState({
-    amount: 0,
-    term: "50",
-    reason: "",
-    paybackAmount: "0"
+    name: "",
+    residence: "",
+    phoneNumber: ""
   })
 
-  const {loanId, setLoanId} = useContext(LoanContext) //handles loan ID
+  const {loanId} = useContext(LoanContext) //handles loan ID
   const [loading, setLoading] = useState(false) //handles loading page
 
   useEffect(() => {
     setLoading(true)
 
     //try to fetch data for that particular loan- this data will be used to populate our form
-    axios.get(`http://localhost:3001/loanBasicInfo/${loanId}`, {
+    axios.get(`http://localhost:3001/loanWitnessInfo/${loanId}`, {
       headers: {
         loginToken: localStorage.getItem("loginToken")
       }
@@ -45,14 +44,21 @@ const LoanBasicInfo = ({nextStep}) => {
 
   //validate fields using YUP
   const validationSchema = Yup.object().shape({
-    amount: Yup.number()
-      .required("Please enter amount")
-      .min(10000, "Small amount. Loan starts from 10,000") ,
-    term: Yup.string()
-      .required("Please select loan term"),
-    reason: Yup.string()
-      .required("Please fill this field")
-      .min(4, "Text is too short"),
+    name: Yup.string()
+      .min(3, "Your name is too short!")
+      .max(100, "Your name is too long!")
+      .required("Please enter loan witness loan!")
+      .matches(/^[a-zA-Z0-9' ]{3,}$/g, "Invalid name! Check your name carefully"),
+    residence: Yup.string()
+      .min(3, "Your name is too short!")
+      .max(100, "Your name is too long!")
+      .required("Please enter loan witness address")
+      .matches(/^[a-zA-Z0-9' ]{3,}$/g, "Invalid name! Check your name carefully"),
+    phoneNumber: Yup.string()
+      .min(9, "Your mobile number is too short!")
+      .max(14, "Your mobile number is too long!")
+      .required("Please enter loan witness phone number!")
+      .matches(/^[0-9+ ]{9,14}$/g, "Invalid mobile number! Check your number carefully"),
   })
 
   //handle data submission when submit button has been clicked
@@ -62,13 +68,12 @@ const LoanBasicInfo = ({nextStep}) => {
 
     setLoading(true)
 
-    axios.post("http://localhost:3001/loanBasicInfo", data, {
+    axios.post("http://localhost:3001/loanWitnessInfo", data, {
       headers: {
         loginToken: localStorage.getItem("loginToken")
       }
     }).then(result => {
       //get the generated loan id from auto increment
-      setLoanId(result.data.id)
       setLoading(false)
       nextStep()
     }).catch(err => {
@@ -85,7 +90,7 @@ const LoanBasicInfo = ({nextStep}) => {
         onSubmit={onSubmit}
       >
         {/* form should be wrappped in formik for easy access to formik context variables */}
-        <LoanBasicInfoForm initValues={initValues}/>
+        <LoanWitnessInfoForm initValues={initValues}  prevStep={prevStep}/>
       </Formik>
 
       {
@@ -95,4 +100,4 @@ const LoanBasicInfo = ({nextStep}) => {
   )
 }
 
-export default LoanBasicInfo
+export default LoanWitnessInfo

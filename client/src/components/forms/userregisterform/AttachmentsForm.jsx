@@ -87,6 +87,7 @@ const AttachmentsForm = ({initValues, prevStep, image}) => {
                 className={touched.file && errors.file ? 
                 "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-700" :
                 "w-full p-3 rounded-lg px-5 text-black"}
+                autocomplete="off"
             />
         </div>
         {
@@ -106,7 +107,6 @@ const AttachmentsForm = ({initValues, prevStep, image}) => {
             </button>
             <button 
                 type='submit'
-                disabled ={!(dirty && isValid)}
                 className={
                 !(dirty && isValid) ? 
                 "border-0 p-2 bg-white bg-opacity-80 text-gray-400 rounded-xl shadow-2xl px-5"

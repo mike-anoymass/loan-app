@@ -19,9 +19,8 @@ const SideBar = closeSideBar => {
   
   const categories = [
     { name: "Loan Application", id: "newApplication", icon: SiWebmoney, fontSize: 16}, 
-    { name: "My Applications", id: "myApplication", icon: CiFaceSmile, fontSize: 20},
-    { name: "My Loans", id: "myHistory", icon: GiReceiveMoney, fontSize: 20},
-    { name: "Loan History", id: "myLoans", icon: AiOutlineHistory, fontSize:20},
+    { name: "Pending Applications", id: "myApplications", icon: CiFaceSmile, fontSize: 20},
+    { name: "My Loans", id: "myLoans", icon: GiReceiveMoney, fontSize: 20},
     { name: "Notifications", id: "notification", icon: GrNotification, fontSize:17},
     { name: "User Profile", id: "profile", icon: GrUserExpert, fontSize:17},
     { name: "Other", id: "other", icon: AiFillHome},
@@ -36,13 +35,13 @@ const SideBar = closeSideBar => {
       </Link>
       
 
-      <div className='flex flex-col h-full overflow-y-scroll mt-3 hide-scrollbar gap-5'>
+      <div className='flex flex-col h-full overflow-auto mt-3 gap-5'>
           <NavLink
             to={'/'}
             className={({isActive}) => isActive ? isActiveStyle : isNotActiveStyle }
             onClick={() => closeSideBar(false)}
           >
-            <AiFillHome fontSize={18}/> 
+            <AiFillHome fontSize={18} className='text-black'/> 
             Home
           </NavLink>
           
@@ -51,18 +50,16 @@ const SideBar = closeSideBar => {
 
           {
             authUser.login_status && categories.slice(0, categories.length -1 ).map(category => {
-              return (
-                
+              return ( 
                 <NavLink 
                   to={`/category/${category.id}`}
                   className={({isActive}) => isActive ? isActiveStyle : isNotActiveStyle}
                   key={category.name}
                   onClick = {() => closeSideBar(false)}
                 >
-                  <category.icon fontSize={category.fontSize}/>
+                  <category.icon fontSize={category.fontSize} className='text-black'/>
                   {category.name}
                 </NavLink>
-
               )
             })
           }
@@ -71,11 +68,13 @@ const SideBar = closeSideBar => {
       {
         authUser.login_status ? (
           <div>
-            <div className='px-5 shadow-xl py-3 hidden relative md:flex flex-row items-center justify-start gap-2'>
-              <img src={authUser.imageUrl} alt="Profile"
-              className='w-14 rounded-full cursor-pointer'
-              onClick={() => toggleUserInfo ? setToggleUserInfo(false) : setToggleUserInfo(true)}
-            />
+            <div className='px-5 shadow-xl py-3 relative text-black md:flex flex-row items-center justify-start gap-2'>
+              <img 
+                src={authUser.imageUrl} 
+                alt="Profile"
+                className='w-14 rounded-full cursor-pointer'
+                onClick={() => toggleUserInfo ? setToggleUserInfo(false) : setToggleUserInfo(true)}
+              />
               {authUser.name}
             </div>
 

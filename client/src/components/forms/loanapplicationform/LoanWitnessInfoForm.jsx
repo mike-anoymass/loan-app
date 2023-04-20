@@ -2,33 +2,34 @@ import React, { useEffect } from 'react'
 import { useFormikContext, ErrorMessage, Field, Form } from 'formik'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
-const LoanCollateralInfoForm = ({initValues, prevStep}) => {
+const LoanWitnessInfoForm = ({initValues, prevStep}) => {
   const {errors, touched, dirty, isValid, setValues} = useFormikContext()
   const labelStyle = "md:text-lg text-md px-2 font-light"
 
   useEffect(() => {
+    console.log(initValues)
     setValues(initValues)
   }, [initValues])
 
   return (
-    <Form className='w-full'>
+    <Form className='w-full' autoComplete='off'>
       <div className='gap-1 flex flex-col items-start p-2 w-full' >
           <label htmlFor=""
               className={labelStyle}
           >
-              Your Monthly Earning * :
+              Name of Witness * :
           </label>
           <div className='flex w-full animate-pulse flex-row items-end text-red-900 font-medium justify-end px-2'>
-              <ErrorMessage name='monthlyEarning'/>
+              <ErrorMessage name='name'/>
           </div>
           <Field
-              name="monthlyEarning"
-              id="monthlyEarning"
+              name="name"
+              id="name"
               className={ touched.monthlyEarning && errors.monthlyEarning ?
               "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-500" :
               "w-full p-3 rounded-lg px-5 text-black border-2 border-gray-300"
               }
-              placeholder="How much do you earn per month ?"
+              placeholder="Name of loan witness ?"
               autocomplete="off"
           />
       </div>
@@ -37,19 +38,19 @@ const LoanCollateralInfoForm = ({initValues, prevStep}) => {
           <label htmlFor=""
               className={labelStyle}
           >
-            Name of the Collateral * :
+            Witness Phone Number * :
           </label>
           <div className='flex w-full animate-pulse flex-row items-end text-red-900 font-medium justify-end px-2'>
-              <ErrorMessage name='description'/>
+              <ErrorMessage name='phoneNumber'/>
           </div>
           <Field
-              name="description"
-              id="description"
+              name="phoneNumber"
+              id="phoneNumber"
               className={ touched.description && errors.description ?
               "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-500" :
               "w-full p-3 rounded-lg px-5 text-black border-2 border-gray-300"
               }
-              placeholder="What collateral do you have for this loan ?"
+              placeholder="What's the phone number for this witness ?"
               autocomplete="off"
           />
       </div>
@@ -58,20 +59,20 @@ const LoanCollateralInfoForm = ({initValues, prevStep}) => {
           <label htmlFor=""
               className={labelStyle}
           >
-              Collateral Valuation in cash * :
+              Witness Residence/ Address* :
           </label>
           <div className='flex w-full animate-pulse flex-row items-end text-red-900 font-medium justify-end px-2'>
-              <ErrorMessage name='valuation'/>
+              <ErrorMessage name='residence'/>
           </div>
           <Field
-              name="valuation"
-              id="valuation"
+              name="residence"
+              id="residence"
+              as="textarea"
               className={ touched.valuation && errors.valuation ?
               "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-500" :
               "w-full p-3 rounded-lg px-5 text-black border-2 border-gray-300"
               }
-              placeholder="How much is your collateral in terms of money ?"
-              autocomplete="off"
+              placeholder="Where does the witness live ?"
           />
       </div>
 
@@ -104,4 +105,4 @@ const LoanCollateralInfoForm = ({initValues, prevStep}) => {
   )
 }
 
-export default LoanCollateralInfoForm
+export default LoanWitnessInfoForm

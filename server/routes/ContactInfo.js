@@ -16,20 +16,31 @@ router.post("/", auth, async (req, res) => {
     data.userId = authUser.googleId
 
     if(!exist){
-        await ContactInfo.create(data)
-        res.json("Contact Info Saved")
+        try {
+            // Sequelize operation that may throw an error
+            await ContactInfo.create(data)
+            res.json("Contact Info Saved")
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+        
     }else{
-        await ContactInfo.update({
+        try {
+            // Sequelize operation that may throw an error
+            await ContactInfo.update({
             mobile: data.mobile, 
             telephone: data.telephone, 
             address: data.address, 
             email: data.email
             }, { 
-                where: {
-                    userId: data.userId
-                }
-            })
+            where: {
+                userId: data.userId
+            }
+        })
         res.json({error: "Contact Info Exist"})
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
     }
 
 })

@@ -7,6 +7,9 @@ const contactInfoRouter = require("./routes/ContactInfo")
 const workInfoRouter = require("./routes/WorkInfo")
 const attachmentInfoRouter = require("./routes/UserAttachment")
 const loanBasicInfoRouter = require("./routes/LoanBasicInfo")
+const loanCollateralInfoRouter = require("./routes/LoanCollateralInfo")
+const loanWitnessInfoRouter = require("./routes/LoanWitnessInfo")
+const loanBankInfoRouter = require("./routes/LoanBankInfo")
 
 require("dotenv").config()
 
@@ -21,6 +24,9 @@ server.use("/contactInfo", contactInfoRouter)
 server.use("/workInfo", workInfoRouter)
 server.use("/attachmentInfo", attachmentInfoRouter)
 server.use("/loanBasicInfo", loanBasicInfoRouter)
+server.use("/loanCollateralInfo", loanCollateralInfoRouter)
+server.use("/loanWitnessInfo", loanWitnessInfoRouter)
+server.use("/loanBankInfo", loanBankInfoRouter)
 
 models.sequelize.sync()
     .then(() => {

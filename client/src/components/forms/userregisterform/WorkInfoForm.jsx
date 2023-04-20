@@ -25,7 +25,8 @@ const WorkInfoForm = ({initValues, prevStep}) => {
                 className={touched.incomeSource && errors.incomeSource ? 
                 "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-700" :
                 "w-full p-3 rounded-lg px-5 text-black"}
-                placeholder="e.g. Employed, Business, Pension ..etc "
+                placeholder="e.g. Employed, Business, Pension ..etc"
+                autocomplete="off"
             />
         </div>
 
@@ -45,6 +46,7 @@ const WorkInfoForm = ({initValues, prevStep}) => {
                 "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-700" :
                 "w-full p-3 rounded-lg px-5 text-black"}
                 placeholder="What's your role ?"
+                autocomplete="off"
             />
         </div>
 
@@ -64,7 +66,8 @@ const WorkInfoForm = ({initValues, prevStep}) => {
                 className={touched.address && errors.address ? 
                 "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-700" :
                 "w-full p-3 rounded-lg px-5 text-black"}
-                placeholder="e.g. Ministry of finance - Lilongwe    "
+                placeholder="e.g. Ministry of finance - Lilongwe"
+                autocomplete="off"
             />
         </div>
         <hr />
@@ -78,7 +81,6 @@ const WorkInfoForm = ({initValues, prevStep}) => {
             </button>
             <button 
                 type='submit'
-                disabled ={!(dirty && isValid)}
                 className={
                 !(dirty && isValid) ? 
                 "border-0 p-2 bg-white bg-opacity-80 text-gray-400 rounded-xl shadow-2xl px-5"

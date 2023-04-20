@@ -40,7 +40,7 @@ router.post("/", auth, upload.single('image'), async (req, res) => {
                 userId: data.userId
             }
         })
-        res.json({error: "Attachment information exist", data: info})
+        res.json({error: "Attachment information exist", data: info, newLocation: data.location})
     }
 })
 

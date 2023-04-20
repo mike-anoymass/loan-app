@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Formik } from "formik"
 import * as Yup from 'yup'
-import { LoanBasicInfoForm, LoanCollateralInfoForm } from "./"
+import { LoanCollateralInfoForm } from "./"
 import axios from 'axios'
 import { LoanContext } from "../../../helpers/Context"
+import Loading from "../../Loading"
 
 const LoanCollateralInfo = ({nextStep, prevStep}) => {
    const [initValues, setInitValues] = useState({
@@ -13,6 +14,34 @@ const LoanCollateralInfo = ({nextStep, prevStep}) => {
   })
 
   const {loanId, setLoanId} = useContext(LoanContext)
+
+  const [loading, setLoading] = useState(false) //handles loading page
+
+  useEffect(() => {
+    setLoading(true)
+
+    //try to fetch data for that particular loan- this data will be used to populate our form
+    axios.get(`http://localhost:3001/loanCollateralInfo/${loanId}`, {
+      headers: {
+        loginToken: localStorage.getItem("loginToken")
+      }
+    }).then(res => {
+      setLoading(false)
+      console.log(res)
+      if(!res.data.error)
+      {
+        setInitValues(res.data)
+      }else{
+        setInitValues(initValues)
+      }
+    })
+    .catch(err => {
+      setLoading(false)
+      console.log(err.message)
+    })
+ 
+  }, [])
+
 
   const validationSchema = Yup.object().shape({
     monthlyEarning: Yup.number()
@@ -26,17 +55,20 @@ const LoanCollateralInfo = ({nextStep, prevStep}) => {
 
   const onSubmit = data => {
     data.loanId = loanId
-    console.log(data)
+    setLoading(true)
 
-   /* axios.post("http://localhost:3001/loanBasicInfo", data , {
+   axios.post("http://localhost:3001/loanCollateralInfo", data , {
       headers: {
         loginToken: localStorage.getItem("loginToken")
       }
     }).then(result => {
-      setLoanId(result.data.loanId)
+      setLoading(false)
       nextStep()
-    }).catch(err => console.log(err))
-    */
+    }).catch(err => {
+      console.log(err)
+      setLoading(false)
+    })
+  
   }
 
   return (
@@ -48,6 +80,11 @@ const LoanCollateralInfo = ({nextStep, prevStep}) => {
       >
         <LoanCollateralInfoForm initValues={initValues} prevStep={prevStep}/>
       </Formik>
+
+      {
+        loading && <Loading />
+      }
+
     </div>
   )
 }

@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import { useFormikContext, ErrorMessage, Field, Form } from 'formik'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
-const LoanCollateralInfoForm = ({initValues, prevStep}) => {
+const LoanWitnessInfoForm = ({initValues, prevStep}) => {
   const {errors, touched, dirty, isValid, setValues} = useFormikContext()
   const labelStyle = "md:text-lg text-md px-2 font-light"
 
   useEffect(() => {
+    console.log(initValues)
     setValues(initValues)
   }, [initValues])
 
@@ -16,19 +17,48 @@ const LoanCollateralInfoForm = ({initValues, prevStep}) => {
           <label htmlFor=""
               className={labelStyle}
           >
-              Your Monthly Earning * :
+            Bank Name * :
           </label>
           <div className='flex w-full animate-pulse flex-row items-end text-red-900 font-medium justify-end px-2'>
-              <ErrorMessage name='monthlyEarning'/>
+              <ErrorMessage name='bankName'/>
           </div>
           <Field
-              name="monthlyEarning"
-              id="monthlyEarning"
-              className={ touched.monthlyEarning && errors.monthlyEarning ?
+              name="bankName"
+              id="bankName"
+              as="select"
+              className={ touched.bankName && errors.bankName ?
               "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-500" :
               "w-full p-3 rounded-lg px-5 text-black border-2 border-gray-300"
               }
-              placeholder="How much do you earn per month ?"
+          >
+            <option value="National Bank">National Bank (NBM)</option>
+            <option value="NBS Bank">NBS Bank</option>
+            <option value="Standard Bank">Standard Bank</option>
+            <option value="Unayo Standard Bank">Unayo Standard Bank</option>
+            <option value="FDH Bank">FDH Bank</option>
+            <option value="Fist Capital Bank">First Capital Bank</option>
+            <option value="MyBucks Bank">MyBucks</option>
+            <option value="CDH Bank">CDH</option>
+          </Field>
+      </div>
+
+      <div className='gap-1 flex flex-col items-start p-2 w-full' >
+          <label htmlFor=""
+              className={labelStyle}
+          >
+            Account Name * :
+          </label>
+          <div className='flex w-full animate-pulse flex-row items-end text-red-900 font-medium justify-end px-2'>
+              <ErrorMessage name='accountName'/>
+          </div>
+          <Field
+              name="accountName"
+              id="accountName"
+              className={ touched.accountName && errors.accountName ?
+              "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-500" :
+              "w-full p-3 rounded-lg px-5 text-black border-2 border-gray-300"
+              }
+              placeholder="What's the name of your bank account ?"
               autocomplete="off"
           />
       </div>
@@ -37,41 +67,19 @@ const LoanCollateralInfoForm = ({initValues, prevStep}) => {
           <label htmlFor=""
               className={labelStyle}
           >
-            Name of the Collateral * :
+            Account Number * :
           </label>
           <div className='flex w-full animate-pulse flex-row items-end text-red-900 font-medium justify-end px-2'>
-              <ErrorMessage name='description'/>
+              <ErrorMessage name='accountNumber'/>
           </div>
           <Field
-              name="description"
-              id="description"
-              className={ touched.description && errors.description ?
+              name="accountNumber"
+              id="accountNumber"
+              className={ touched.accountNumber && errors.accountNumber ?
               "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-500" :
               "w-full p-3 rounded-lg px-5 text-black border-2 border-gray-300"
               }
-              placeholder="What collateral do you have for this loan ?"
-              autocomplete="off"
-          />
-      </div>
-
-      <div className='gap-1 flex flex-col items-start p-2 w-full' >
-          <label htmlFor=""
-              className={labelStyle}
-          >
-              Collateral Valuation in cash * :
-          </label>
-          <div className='flex w-full animate-pulse flex-row items-end text-red-900 font-medium justify-end px-2'>
-              <ErrorMessage name='valuation'/>
-          </div>
-          <Field
-              name="valuation"
-              id="valuation"
-              className={ touched.valuation && errors.valuation ?
-              "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-500" :
-              "w-full p-3 rounded-lg px-5 text-black border-2 border-gray-300"
-              }
-              placeholder="How much is your collateral in terms of money ?"
-              autocomplete="off"
+              placeholder="What's your bank account number ?"
           />
       </div>
 
@@ -104,4 +112,4 @@ const LoanCollateralInfoForm = ({initValues, prevStep}) => {
   )
 }
 
-export default LoanCollateralInfoForm
+export default LoanWitnessInfoForm

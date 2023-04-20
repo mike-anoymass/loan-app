@@ -26,6 +26,7 @@ const ContactInfoForm = ({initValues, prevStep}) => {
                 "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-700" :
                 "w-full p-3 rounded-lg px-5 text-black"}
                 placeholder="What's your mobile phone number (whatsapp ..etc) ?"
+                autocomplete="off"
             />
         </div>
 
@@ -45,6 +46,7 @@ const ContactInfoForm = ({initValues, prevStep}) => {
                 "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-700" :
                 "w-full p-3 rounded-lg px-5 text-black"}
                 placeholder="What's your telephone number (for calls ..etc) ?"
+                autocomplete="off"
             />
         </div>
 
@@ -65,6 +67,7 @@ const ContactInfoForm = ({initValues, prevStep}) => {
                 "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-700" :
                 "w-full p-3 rounded-lg px-5 text-black"}
                 placeholder="Where do you stay ? or Just leave you home address"
+                autocomplete="off"
             />
         </div>
 
@@ -84,6 +87,7 @@ const ContactInfoForm = ({initValues, prevStep}) => {
                 "w-full p-3 rounded-lg px-5 text-red-800 border-2 border-red-700" :
                 "w-full p-3 rounded-lg px-5 text-black"}
                 placeholder="Leave an email that we should use to send you notifications"
+                autocomplete="off"
             />
         </div>
         <hr />
@@ -97,7 +101,6 @@ const ContactInfoForm = ({initValues, prevStep}) => {
             </button>
             <button 
                 type='submit'
-                disabled ={!(dirty && isValid)}
                 className={
                 !(dirty && isValid) ? 
                 "border-0 p-2 bg-white bg-opacity-80 text-gray-400 rounded-xl shadow-2xl px-5"

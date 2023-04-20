@@ -45,15 +45,11 @@ const Attachments = ({nextStep, prevStep}) => {
     file: Yup.mixed().required('Attach an image of your identity'),
   })
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     const formData = new FormData()
     formData.append("image", data.file)
     formData.append("description", data.fileName)
 
-    console.log(formData)
-
-
-   
     setLoading(true)
     axios.post("http://localhost:3001/attachmentInfo", formData, {
       headers: {
